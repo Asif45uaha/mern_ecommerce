@@ -157,6 +157,9 @@ app.post("/paymentverification", async (req, res) => {
             .digest("hex")
         const isAuthentic = expectedSignature === razorpay_signature
         if (isAuthentic) {
+            res.redirect(
+                `https://ecom-two-neon.vercel.app/paymentsuccess?reference=${razorpay_payment_id}`
+            );
             await Payment.create({
                 razorpay_order_id,
                 razorpay_payment_id,
