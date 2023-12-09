@@ -4,15 +4,12 @@ const Footer = () => {
 
     return (
         <div className="flex flex-col bg-black/90  mx-auto justify-center py-4">
-            <div className="flex  flex-row flex-wrap gap-4 md:gap-16 justify-center text-white py-2 font-Poppins">
-                <div className="flex flex-col pr-4 md:pr-0">
-                    <div className="flex flex-row">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                        <p className=" font-bold">Laptops</p>
+            <div className="flex  flex-row flex-wrap gap-8 px-4 w-[95%] md:w-full mx-auto md:px-0 md:gap-16 justify-center text-white py-2 font-Poppins">
+                <div className="flex flex-col gap-2">
+                    <div className="hover:border-b-2 hover:border-gray-300 cursor-pointer">
+                        <p className=" font-bold text-xs md:text-lg">Laptops</p>
                     </div>
-                    <div className="flex flex-col justify-center items-start pl-0 md:pl-6 gap-1 text-white">
+                    <div className="flex flex-col text-xs md:text-lg justify-center items-start  gap-1 text-white">
                         <p>Acer</p>
                         <p>MSI</p>
                         <p>Chuwi</p>
@@ -22,14 +19,12 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col">
-                    <div className="flex flex-row">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                        <p className=" font-bold">Mobiles</p>
+                <div className="flex flex-col gap-2">
+                    <div className="hover:border-b-2 hover:border-gray-300 cursor-pointer">
+
+                        <p className=" font-bold text-xs md:text-lg">Mobiles</p>
                     </div>
-                    <div className="flex flex-col pl-0 md:pl-6 justify-center items-start gap-1 text-white">
+                    <div className="flex flex-col text-xs md:text-lg justify-center items-start gap-1 text-white">
                         <p>Samsung</p>
                         <p>Redmi</p>
                         <p>Apple</p>
@@ -38,14 +33,11 @@ const Footer = () => {
                         <p>Poco</p>
                     </div>
                 </div>
-                <div className="flex flex-col">
-                    <div className="flex flex-row">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                        <p className=" font-bold">Men&apos;s</p>
+                <div className="flex flex-col gap-2">
+                    <div className="hover:border-b-2 hover:border-gray-300 cursor-pointer">
+                        <p className="text-xs md:text-lg font-bold">Men&apos;s</p>
                     </div>
-                    <div className="flex flex-col pl-0 md:pl-6 justify-center items-start gap-1 text-white">
+                    <div className="flex flex-col text-xs md:text-lg  justify-center items-start gap-1 text-white">
                         <p>Shirts</p>
                         <p>Jeans</p>
                         <p>Jackets</p>
@@ -54,14 +46,12 @@ const Footer = () => {
                     </div>
 
                 </div>
-                <div className="flex flex-col">
-                    <div className="flex flex-row">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                        <p className=" font-bold">Women&apos;s</p>
+                <div className="flex flex-col gap-2">
+                    <div className="hover:border-b-2 hover:border-gray-300 cursor-pointer">
+
+                        <p className="text-xs md:text-lg  font-bold">Women&apos;s</p>
                     </div>
-                    <div className="flex flex-col pl-0 md:pl-6  justify-center items-start gap-1 text-white">
+                    <div className="flex flex-col text-xs md:text-lg pl-0 md:pl-6  justify-center items-start gap-1 text-white">
                         <p> shoes</p>
                         <p>saree</p>
                         <p>shorts</p>
@@ -69,27 +59,21 @@ const Footer = () => {
                         <p>plazzos</p>
                     </div>
                 </div>
-                <div className="flex flex-col">
-                    <div className="flex flex-row">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                        <p className=" font-bold">Groceries</p>
+                <div className="flex flex-col gap-2">
+                    <div className="hover:border-b-2 hover:border-gray-300 cursor-pointer">
+                        <p className="text-xs md:text-lg font-bold">Groceries</p>
                     </div>
-                    <div className="flex flex-col pl-0 md:pl-6  justify-center items-start gap-1 text-white">
+                    <div className="flex flex-col text-xs md:text-lg justify-center items-start gap-1 text-white">
                         <p>Powder</p>
                         <p>Chocolate</p>
                         <p>Dry Fruits</p>
                     </div>
                 </div>
-                <div className="flex flex-col">
-                    <div className="flex flex-row">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                        <p className=" font-bold">Watches</p>
+                <div className="flex flex-col gap-2">
+                    <div className="hover:border-b-2 hover:border-gray-300 cursor-pointer">
+                        <p className="text-xs md:text-lg font-bold">Watches</p>
                     </div>
-                    <div className="flex flex-col pl-0 md:pl-6 justify-center items-start gap-1 text-white">
+                    <div className="flex flex-col text-xs md:text-lg justify-center items-start gap-1 text-white">
                         <p>MVMT</p>
                         <p>VAN HEUSEN</p>
                         <p>MICHAEl KLIEN</p>

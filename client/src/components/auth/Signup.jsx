@@ -111,7 +111,7 @@ const Signup = ({ setVariant }) => {
                     </Button>
                     <Typography color="gray" className="mt-4 text-center font-normal">
                         Already have an account?
-                        <a className="font-medium text-gray-900" onClick={() => setVariant("signin")}>
+                        <a className="font-medium text-gray-900 cursor-pointer" onClick={() => setVariant("signin")}>
                             Sign In
                         </a>
                     </Typography>

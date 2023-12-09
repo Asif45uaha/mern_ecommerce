@@ -22,7 +22,7 @@ const Brand = () => {
                     <img className="w-[100px] h-[100px] object-contain mx-auto" src="https://www.pngmart.com/files/10/Black-Apple-Logo-PNG-Transparent-Image.png" alt="Wrogn" />
                 </div>
                 <div className="flex flex-row items-center font-Poppins  shadow-md px-4 py-2  md:px-12 md:py-2 hover:scale-110 transition-all duration-200 delay-150 ease-in-out">
-                    <img className="md:w-[100px] md:h-[100px] object-contain mx-auto" src="https://th.bing.com/th/id/OIP.01VUUuevE0ugZZ6f1GfijQHaEK?w=275&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Wrogn" />
+                    <img className="w-[100px] h-[100px] object-contain mx-auto" src="https://th.bing.com/th/id/OIP.01VUUuevE0ugZZ6f1GfijQHaEK?w=275&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Wrogn" />
                 </div>
                 <div className="flex flex-row items-center font-Poppins  shadow-md px-4 py-2  md:px-12 md:py-2 hover:scale-110 transition-all duration-200 delay-150 ease-in-out">
                     <img className="w-[100px] h-[100px] object-contain mx-auto" src="https://th.bing.com/th/id/OIP.uMlofGftlNJaqjhHYWhptwAAAA?w=166&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Wrogn" />

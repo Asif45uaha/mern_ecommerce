@@ -98,7 +98,7 @@ const Navbar = () => {
                     <MenuList>
                         <MenuItem onClick={() => navigate("/profile")}>
                             {
-                                user && <div className="flex flex-row items-center">
+                                user && <div className="flex flex-row items-center gap-1">
                                     <Avatar src={user?.profilePic} alt="avatar" />
                                     <Typography >{`${user?.name}`}</Typography>
                                 </div>
@@ -106,7 +106,7 @@ const Navbar = () => {
                         </MenuItem>
                         <MenuItem>
                             <div className="flex flex-col justify-start">
-                                <div className="flex flex-row items-center py-1 rounded-md">
+                                <div className="flex flex-row items-center py-1 gap-1 rounded-md">
                                     {
                                         user ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />

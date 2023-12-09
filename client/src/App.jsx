@@ -18,16 +18,17 @@ import { Navigate } from 'react-router-dom'
 import PaymentSuccess from "./pages/PaymentSuccess"
 import Orders from "./pages/Orders"
 import ProfilePage from "./pages/ProfilePage"
+import ScrollToTop from "./scroll/ScrolltoTop"
 
 function App() {
   const { user } = UserAuth()
   return (
     <main>
       <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={user ? <Home /> : <Navigate to="/auth" />} />
         <Route path="/auth" element={!user ? <AuthPage /> : <Navigate to={'/'} />} />
-
         <Route path="/laptops" element={<LaptopPage />} />
         <Route path="/mobiles" element={<MobilePage />} />
         <Route path="/mens" element={<MensPage />} />
