@@ -162,7 +162,7 @@ app.post("/paymentverification", async (req, res) => {
                 razorpay_payment_id,
                 razorpay_signature,
             });
-            res.redirect("https://ecommerce-smoky-beta.vercel.app/paymentsuccess")
+
         }
         else {
             res.status(400).json({
