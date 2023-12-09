@@ -7,7 +7,7 @@ const ProfilePage = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const res = await axios.get(`http://localhost:8000/getuser/${user?._id}`)
+                const res = await axios.get(`https://ecommerce-4y88.onrender.com/getuser/${user?._id}`)
                 setData(res?.data)
             } catch (error) {
                 console.log(error);

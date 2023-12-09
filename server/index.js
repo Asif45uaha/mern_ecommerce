@@ -162,7 +162,7 @@ app.post("/paymentverification", async (req, res) => {
                 razorpay_payment_id,
                 razorpay_signature,
             });
-            res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
+            res.redirect(`https://ecommerce-smoky-beta.vercel.app/paymentsuccess?reference=${razorpay_payment_id}`)
         }
         else {
             res.status(400).json({
