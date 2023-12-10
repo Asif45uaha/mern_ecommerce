@@ -9,13 +9,17 @@ import User from "./models/user-model.js"
 import Razorpay from 'razorpay'
 import crypto from 'crypto'
 import { Payment } from "./models/payment-model.js"
-
+import protectedRoute from "./middlewares/protectRoute.js"
+import GenTokenSetCookie from "./helpers/GenTokenAndSetCookie.js"
 dotenv.config()
 
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}))
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
@@ -51,21 +55,16 @@ app.use("/register", async (req, res) => {
             name,
             email, password: hashpass, profilePic
         })
-        if (newUser) {
-            const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "15d" })
-            res.cookie("jwt", token, {
-                httpOnly: true,
-                maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
-                sameSite: "strict", // CSRF
-            })
-        }
         await newUser.save()
-        return res.status(200).json({
-            _id: newUser._id,
-            name: newUser.name,
-            email: newUser.email,
-            profilePic: newUser.profilePic,
-        });
+        if (newUser) {
+            GenTokenSetCookie(newUser._id, res)
+            res.status(200).json({
+                _id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                profilePic: newUser.profilePic,
+            });
+        }
 
     } catch (error) {
         console.log(error);
@@ -77,14 +76,12 @@ app.use("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ message: "User Doesn't Exixt" })
+        }
         const isMatch = await bcrypt.compare(password, user?.password)
         if (!user || !isMatch) return res.status(400).json({ error: "Invalid name or password" });
-        const token = jwt.sign({ id: user?._id }, process.env.JWT_SECRET, { expiresIn: "15d" })
-        res.cookie("jwt", token, {
-            httpOnly: true,
-            maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
-            sameSite: "strict", // CSRF
-        })
+        GenTokenSetCookie(user._id, res)
         res.status(200).json({
             _id: user._id,
             name: user.name,
@@ -107,12 +104,17 @@ app.use("/logout", async (req, res) => {
     }
 })
 
-app.use("/getuser/:id", async (req, res) => {
+app.use("/getuser/:id", protectedRoute, async (req, res) => {
     try {
+        const userId = req.user._id
         const { id } = req.params;
         const user = await User.findById(id)
         if (!user) return res.status(400).json({ message: "User Doesn't Exist" })
-        res.status(200).json(user)
+        const orders = await Payment.find({ userId })
+        return res.status(200).json({
+            user: user,
+            orders
+        })
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: error.message })
@@ -121,21 +123,33 @@ app.use("/getuser/:id", async (req, res) => {
 
 //payment Routes
 
-app.get("/getkey", (req, res) => {
+app.get("/getkey", protectedRoute, async (req, res) => {
     try {
+        const userId = req.user._id
+        const user = await User.findById(userId)
+        if (!user) {
+            return res.status(404).json({ message: "User Doesn't exist" })
+        }
+
         return res.status(200).json({ key: process.env.RAZORPAY_KEY_ID })
 
     } catch (error) {
         res.status(400).json({ msg: error.msg })
     }
 })
-app.post("/checkout", async (req, res) => {
+app.post("/checkout", protectedRoute, async (req, res) => {
     try {
         const { amount } = req.body
+        const userId = req.user._id
+        const user = await User.findById(userId)
+        if (!user) {
+            return res.status(404).json({ message: "User Doesn't exist" })
+        }
         const options = {
             amount: Number(amount * 100),
             currency: "INR"
         }
+
         const order = await instance.orders.create(options)
         res.status(200).json({
             order,
@@ -145,9 +159,9 @@ app.post("/checkout", async (req, res) => {
     }
 })
 
-app.post("/paymentverification", async (req, res) => {
+app.post("/paymentverification", protectedRoute, async (req, res) => {
     try {
-
+        const id = req.user._id;
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
             req.body;
         const body = razorpay_order_id + "|" + razorpay_payment_id;
@@ -160,12 +174,14 @@ app.post("/paymentverification", async (req, res) => {
             res.redirect(
                 `https://ecom-two-neon.vercel.app/paymentsuccess?reference=${razorpay_payment_id}`
             );
-            await Payment.create({
-                razorpay_order_id,
-                razorpay_payment_id,
-                razorpay_signature,
-            });
 
+            const payment = await Payment.create({
+                razorpay_order_id, razorpay_payment_id, razorpay_signature, userId: id
+            })
+            const user = await User.findById(id)
+            if (user) {
+                await User.findByIdAndUpdate(user._id, { $push: { orders: payment._id } })
+            }
         }
         else {
             res.status(400).json({
@@ -177,10 +193,15 @@ app.post("/paymentverification", async (req, res) => {
     }
 })
 
-app.get("/getOrders", async (req, res) => {
+app.get("/getOrders", protectedRoute, async (req, res) => {
     try {
-        const orders = await Payment.find({})
-        res.status(200).json(orders);
+        const userId = req.user._id
+        const user = await User.findById(userId)
+        if (!user) {
+            return res.status(404).json({ message: "User Doesn't exist" })
+        }
+        const payments = await Payment.find({ userId })
+        res.status(200).json(payments)
 
     } catch (error) {
         return res.status(500).json(error)

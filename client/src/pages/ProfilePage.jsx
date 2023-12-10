@@ -17,8 +17,9 @@ const ProfilePage = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const res = await axios.get(`https://ecommerce-4y88.onrender.com/getuser/${user?._id}`)
+                const res = await axios.get(`http://localhost:8000/getuser/${user?._id}`, { withCredentials: true, baseURL: "http://localhost:8000" })
                 setData(res?.data)
+
             } catch (error) {
                 console.log(error);
             }
@@ -30,14 +31,17 @@ const ProfilePage = () => {
         <div className='h-screen flex justify-center items-center'>
             <Card className="w-96 mx-auto">
                 <CardHeader floated={false} className="h-80">
-                    <img src={data?.profilePic} alt="profile-picture" />
+                    <img src={data?.user?.profilePic} alt="profile-picture" />
                 </CardHeader>
                 <CardBody className="text-center">
                     <Typography variant="h4" color="blue-gray" className="mb-2">
-                        {data?.name}
+                        {data?.user?.name}
                     </Typography>
                     <Typography color="blue-gray" className="font-medium" textGradient>
-                        {data?.email}
+                        {data?.user?.email}
+                    </Typography>
+                    <Typography color="blue-gray" className="font-medium" textGradient>
+                        Orders Placed: {data?.orders?.length}
                     </Typography>
                 </CardBody>
                 <CardFooter className="flex justify-center gap-7 pt-2">

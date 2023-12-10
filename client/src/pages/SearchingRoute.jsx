@@ -27,12 +27,13 @@ const SearchingRoute = () => {
     return (
         <div className="flex flex-col max-w-7xl mx-auto font-Poppins">
             <h2 className="text-xl text-center">Searched Products</h2>
+            {
+                results.length === 0 && <div className="flex justify-center items-center h-screen">
+                    <p className="font-bold text-center">No such Products</p>
+                </div>
+            }
             <div className="flex flex-col md:flex-row md:flex-wrap">
-                {
-                    results.length === 0 && <div className="flex justify-center items-center h-screen">
-                        <p className="font-bold">No such Products</p>
-                    </div>
-                }
+
                 {
                     results.map((item, id) =>
                         <div key={id} className="flex flex-col  justify-start items-center gap-2 p-2">

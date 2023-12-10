@@ -5,7 +5,7 @@ const Search = () => {
     const navigate = useNavigate();
     const handleSubmit = (ev) => {
         ev.preventDefault();
-        let query = ev.target[0].value
+        let query = ev.target[0].value.toLowerCase()
         if (query.trim() === "") {
             return;
         }

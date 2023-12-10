@@ -21,6 +21,7 @@ import {
 } from "@material-tailwind/react";
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast';
 const Navbar = () => {
     const { user, setUser } = UserAuth()
     const [isSticky, setIsSticky] = useState(false)
@@ -45,7 +46,12 @@ const Navbar = () => {
     }, [])
     const handleLogout = async () => {
         try {
-            await axios.post("https://ecommerce-4y88.onrender.com/logout")
+            await axios.post("http://localhost:8000/logout", { withCredentials: true, baseURL: "http://localhost:8000" })
+            toast.success("Logout Success!!", {
+                duration: 5000,
+                position: "top-center",
+
+            })
             localStorage.removeItem("jwt_auth")
             setUser(null)
         } catch (error) {
@@ -54,9 +60,9 @@ const Navbar = () => {
     }
     return (
         <nav className={`flex flex-row items-center justify-between font-Poppins h-[60px] md:h-[100px] md:px-24 w-full px-4 mx-auto md:w-full py-4 bg-[#fff] z-[42] sticky top-0 ${isSticky ? "shadow-md py-2" : ""}`}>
-            <div className="flex flex-row justify-center items-center gap-0 md:gap-2">
+            <div className="flex flex-row justify-center items-center gap-0 md:gap-1">
                 <Link to="/" className="flex flex-row gap-2 items-center text-2xl md:text-3xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 md:w-8 md:h-8">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
                     <h2 className="font-bold ">Store</h2>
@@ -117,7 +123,10 @@ const Navbar = () => {
                                     }
                                     <Link to={'/auth'}>
                                         {
-                                            user && <p onClick={handleLogout}>Logout</p>
+                                            user && <div>
+                                                <p onClick={handleLogout}>Logout</p>
+                                                <Toaster />
+                                            </div>
                                         }
                                         {
                                             !user && <p>Signup</p>
@@ -142,7 +151,7 @@ const Navbar = () => {
                 </Button>
                 <Drawer open={open} onClose={closeDrawer} className="p-4 ">
                     <div className="mb-6 flex items-center justify-between">
-                        <Typography variant="h5" color="blue-gray">
+                        <Typography onClick={() => navigate("/")} variant="h5" color="blue-gray">
                             Store
                         </Typography>
                         <IconButton variant="text" color="blue-gray" onClick={closeDrawer}>
@@ -189,7 +198,11 @@ const Navbar = () => {
                             }
 
                             {
-                                user && <Typography variant="h5" onClick={handleLogout}>Logout</Typography>
+                                user && <div>
+                                    <Typography variant="h5" onClick={handleLogout}>Logout</Typography>
+                                    <Toaster />
+                                </div>
+
                             }
                             {
                                 !user && <Typography variant="h5">Signup</Typography>

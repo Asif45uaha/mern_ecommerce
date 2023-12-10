@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
+    orders: {
+        type: [String],
+        default: []
+    }
 
 
 })

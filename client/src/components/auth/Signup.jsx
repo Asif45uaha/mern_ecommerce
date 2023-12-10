@@ -40,7 +40,7 @@ const Signup = ({ setVariant }) => {
     const handleSubmit = async (ev) => {
         ev.preventDefault()
         try {
-            const response = await axios.post("https://ecommerce-4y88.onrender.com", { name, email, password, profilePic: imgUrl })
+            const response = await axios.post("http://localhost:8000/register", { name, email, password, profilePic: imgUrl }, { withCredentials: true, baseURL: "http://localhost:8000" })
             localStorage.setItem("jwt_auth", JSON.stringify(response?.data))
             setUser(response?.data)
 
@@ -101,7 +101,7 @@ const Signup = ({ setVariant }) => {
                     </div>
                     <div className="pt-6 w-full mx-auto">
                         {
-                            loading ? "Loading..." : <Button variant="filled" className="w-full" onClick={() => fileRef.current.click()}>Upload Profile</Button>
+                            loading ? <p className="text-center">Loading...</p> : <Button variant="filled" className="w-full" onClick={() => fileRef.current.click()}>Upload Profile</Button>
                         }
 
                         <input onChange={handleImageChange} type="file" ref={fileRef} className="hidden" />
