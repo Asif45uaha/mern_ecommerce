@@ -19,7 +19,7 @@ import PaymentSuccess from "./pages/PaymentSuccess"
 import Orders from "./pages/Orders"
 import ProfilePage from "./pages/ProfilePage"
 import ScrollToTop from "./scroll/ScrolltoTop"
-
+import { Toaster } from 'react-hot-toast'
 function App() {
   const { user } = UserAuth()
   return (
@@ -44,6 +44,8 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
       <Footer />
+      <Toaster />
+
     </main>
   )
 }

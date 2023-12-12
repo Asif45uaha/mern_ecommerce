@@ -17,7 +17,7 @@ const ProfilePage = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const res = await axios.get(`https://ecommerce-4y88.onrender.com/${user?._id}`, { withCredentials: true, baseURL: "https://ecommerce-4y88.onrender.com" })
+                const res = await axios.get(`https://ecommerce-4y88.onrender.com/getuser/${user?._id}`, { withCredentials: true, baseURL: "http://localhost:8000" })
                 setData(res?.data)
 
             } catch (error) {
@@ -29,9 +29,9 @@ const ProfilePage = () => {
     console.log(data);
     return (
         <div className='h-screen flex justify-center items-center'>
-            <Card className="w-96 mx-auto">
+            <Card className="max-w-3xl mx-auto ">
                 <CardHeader floated={false} className="h-80">
-                    <img src={data?.user?.profilePic} alt="profile-picture" />
+                    <img src={data?.user?.profilePic} alt="profile-picture" className='object-contain ' />
                 </CardHeader>
                 <CardBody className="text-center">
                     <Typography variant="h4" color="blue-gray" className="mb-2">

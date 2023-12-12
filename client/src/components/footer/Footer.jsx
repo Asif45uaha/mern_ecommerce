@@ -48,10 +48,9 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col gap-2">
                     <div className="hover:border-b-2 hover:border-gray-300 cursor-pointer">
-
                         <p className="text-xs md:text-lg  font-bold">Women&apos;s</p>
                     </div>
-                    <div className="flex flex-col text-xs md:text-lg pl-0 md:pl-6  justify-center items-start gap-1 text-white">
+                    <div className="flex flex-col text-xs md:text-lg   justify-start items-start gap-1 text-white">
                         <p> shoes</p>
                         <p>saree</p>
                         <p>shorts</p>

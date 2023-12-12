@@ -7,7 +7,7 @@ import {
 import axios from 'axios'
 import { useState } from "react";
 import { UserAuth } from "../../context/AuthContext";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 const Signin = ({ setVariant }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -18,17 +18,22 @@ const Signin = ({ setVariant }) => {
             const response = await axios.post("https://ecommerce-4y88.onrender.com/login", { email, password }, { withCredentials: true, baseURL: "https://ecommerce-4y88.onrender.com" })
             localStorage.setItem("jwt_auth", JSON.stringify(response?.data))
             setUser(response?.data)
-            toast.success("Login Success", {
+            if (response?.status === 200) {
+                toast.success("Login Success", {
+                    duration: 5000,
+                    position: "top-center"
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error?.response?.data?.error, {
                 duration: 5000,
                 position: "top-center"
             })
-        } catch (error) {
-            console.log(error);
         }
     }
     return (
         <>
-            <Toaster />
             <div className="flex flex-col justify-center h-screen">
                 <Card color="transparent" shadow={false} className="max-w-7xl mx-auto">
                     <Typography variant="h4" color="blue-gray">

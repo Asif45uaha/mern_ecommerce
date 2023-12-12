@@ -17,7 +17,8 @@ const app = express()
 
 app.use(express.json())
 app.use(cors({
-    origin: "https://ecom-two-neon.vercel.app",
+    origin: "https://ecommerce-4y88.onrender.com",
+    methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true
 }))
 app.use(express.urlencoded({ extended: true }))
@@ -172,7 +173,7 @@ app.post("/paymentverification", protectedRoute, async (req, res) => {
         const isAuthentic = expectedSignature === razorpay_signature
         if (isAuthentic) {
             res.redirect(
-                `https://ecom-two-neon.vercel.app/paymentsuccess?reference=${razorpay_payment_id}`
+                `httpp://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`
             );
 
             const payment = await Payment.create({

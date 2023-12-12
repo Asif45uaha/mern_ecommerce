@@ -3,7 +3,6 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import Search from "../search/Search"
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useSelector } from 'react-redux'
 import {
     Drawer,
     Button,
@@ -21,12 +20,11 @@ import {
 } from "@material-tailwind/react";
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 const Navbar = () => {
     const { user, setUser } = UserAuth()
     const [isSticky, setIsSticky] = useState(false)
     const [open, setOpen] = useState(false);
-    const { products } = useSelector((state) => state?.product)
     const openDrawer = () => setOpen(true);
     const closeDrawer = () => setOpen(false);
     const navigate = useNavigate()
@@ -56,6 +54,10 @@ const Navbar = () => {
             setUser(null)
         } catch (error) {
             console.log(error);
+            toast.error(error?.response?.data?.error, {
+                duration: 5000,
+                position: "top-center"
+            })
         }
     }
     return (
@@ -72,26 +74,18 @@ const Navbar = () => {
                 <Search />
             </div>
             <div className="hidden md:flex flex-row justify-center items-center gap-6 font-bold cursor-pointer">
-
-                <div className="flex flex-row items-center gap-1 relative">
-                    <p className="absolute bottom-6 left-0 text-sm bg-gray-500 px-2 rounded-full font-Poppins font-bold shadow-lg">{products.length}</p>
+                <Link to={'/cart'} className="flex flex-row justify-center gap-1 ">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                     </svg>
-                    <Link to={'/cart'}>
-                        <p>Cart</p>
-                    </Link>
-
-                </div>
-                <div className="flex flex-row items-center gap-1">
+                    <p>Cart</p>
+                </Link>
+                <Link to={"/wishlist"} className="flex flex-row justify-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                     </svg>
-                    <Link to={"/wishlist"}>
-                        <p>WishList</p>
-                    </Link>
-
-                </div>
+                    <p>WishList</p>
+                </Link>
                 <Menu className="z-[100]">
                     <MenuHandler>
                         <div className="flex flex-row items-center gap-1">
@@ -112,7 +106,7 @@ const Navbar = () => {
                         </MenuItem>
                         <MenuItem>
                             <div className="flex flex-col justify-start">
-                                <div className="flex flex-row items-center py-1 gap-1 rounded-md">
+                                <Link to={'/auth'} className="flex flex-row items-center py-1 gap-1 rounded-md">
                                     {
                                         user ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
@@ -121,26 +115,23 @@ const Navbar = () => {
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
                                             </svg>
                                     }
-                                    <Link to={'/auth'}>
-                                        {
-                                            user && <div>
-                                                <p onClick={handleLogout}>Logout</p>
-                                                <Toaster />
-                                            </div>
-                                        }
-                                        {
-                                            !user && <p>Signup</p>
-                                        }
+                                    {
+                                        user && <div>
+                                            <p onClick={handleLogout}>Logout</p>
+                                        </div>
+                                    }
+                                    {
+                                        !user && <p>Signup</p>
+                                    }
 
-                                    </Link>
-                                </div>
+                                </Link>
                             </div>
                         </MenuItem>
                         <MenuItem>
-                            <div className="flex flex-row items-center gap-1">
+                            <Link to={`/orders`} className="flex flex-row items-center gap-1">
                                 <IoCubeOutline size={25} />
-                                <Link to={`/orders`}><p>Orders</p></Link>
-                            </div>
+                                <p>Orders</p>
+                            </Link>
                         </MenuItem>
                     </MenuList>
                 </Menu>
@@ -200,7 +191,6 @@ const Navbar = () => {
                             {
                                 user && <div>
                                     <Typography variant="h5" onClick={handleLogout}>Logout</Typography>
-                                    <Toaster />
                                 </div>
 
                             }

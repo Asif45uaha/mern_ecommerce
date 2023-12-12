@@ -32,7 +32,7 @@ const SearchingRoute = () => {
                     <p className="font-bold text-center">No such Products</p>
                 </div>
             }
-            <div className="flex flex-col md:flex-row md:flex-wrap">
+            <div className="flex flex-col md:flex-row md:flex-wrap mx-auto justify-center">
 
                 {
                     results.map((item, id) =>

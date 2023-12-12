@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { increaseQty, decreaseQty, removeItem, resetCart } from '../store/ProductSlice'
 import axios from 'axios'
+
 const CartPage = () => {
     const dispatch = useDispatch();
     const item = useSelector((state) => state?.product?.products)
@@ -19,6 +20,12 @@ const CartPage = () => {
         }
         calTotalAmt()
     }, [item])
+
+    const handleRemove = (payload) => {
+        dispatch(removeItem(payload))
+    }
+
+
     const orderNow = async (amount) => {
 
         const { data: { key } } = await axios.get("https://ecommerce-4y88.onrender.com/getkey", { withCredentials: true, baseURL: "https://ecommerce-4y88.onrender.com" })
@@ -30,7 +37,7 @@ const CartPage = () => {
             key,
             amount: order.amount,
             currency: "INR",
-            name: "Ecoomerce",
+            name: "Ecommerce",
             description: "Tutorial of RazorPay",
             image: "https://lh3.googleusercontent.com/a/ACg8ocJFEy5iM5n0P_pk8b4knn7k6rqoppxnXc2HfY4FI0iv=s360-c-no",
             order_id: order.id,
@@ -51,9 +58,9 @@ const CartPage = () => {
         razor.open();
     }
     return (
-        <div className="w-full bg-gray-100 p-4 font-Poppins">
+        <div className="w-full bg-gray-100 p-4 min-h-screen font-Poppins">
             {item.length > 0 ? (
-                <div className="container mx-auto h-auto grid grid-cols-5 gap-8">
+                <div className="container mx-auto  grid grid-cols-5 gap-8 align-middle">
                     <div className="w-full bg-white px-4 col-span-5 xl:col-span-4">
                         <div className="font-titleFont hidden xl:flex items-center justify-between border-b-[1px] border-b-gray-400 py-3">
                             <h1 className="text-3xl font-semibold">Shopping Cart</h1>
@@ -101,7 +108,7 @@ const CartPage = () => {
                                                 </p>
                                             </div>
                                             <button
-                                                onClick={() => dispatch(removeItem(item.id))}
+                                                onClick={() => handleRemove(item?.id)}
                                                 className="bg-red-500 w-36 py-1 rounded-lg text-white mt-2 hover:bg-red-700 active:bg-red-900 duration-300"
                                             >
                                                 Delete Item

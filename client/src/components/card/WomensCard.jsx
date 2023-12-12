@@ -25,10 +25,10 @@ const WomensCard = () => {
     }, [])
     const handleFilter = (subcategory) => {
         if (subcategory === "all") {
-            setFilteredWomens(data.filter((item) => item?.category === "mens"))
+            setFilteredWomens(data.filter((item) => item?.category === "womens"))
         }
         else {
-            const womens = data.filter((item) => item?.subcategory === subcategory && item?.category === "mens")
+            const womens = data.filter((item) => item?.subcategory === subcategory && item?.category === "womens")
             setFilteredWomens(womens)
         }
     }

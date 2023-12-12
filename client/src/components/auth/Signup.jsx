@@ -7,6 +7,7 @@ import {
 import { useState, useRef } from "react";
 import axios from 'axios'
 import { UserAuth } from "../../context/AuthContext";
+import { toast } from 'react-hot-toast'
 const Signup = ({ setVariant }) => {
     const { setUser } = UserAuth()
     const [name, setName] = useState("")
@@ -43,9 +44,19 @@ const Signup = ({ setVariant }) => {
             const response = await axios.post("https://ecommerce-4y88.onrender.com/register", { name, email, password, profilePic: imgUrl }, { withCredentials: true, baseURL: "https://ecommerce-4y88.onrender.com" })
             localStorage.setItem("jwt_auth", JSON.stringify(response?.data))
             setUser(response?.data)
+            if (response?.status === 201) {
+                toast.success("Signup Success", {
+                    duration: 5000,
+                    position: "top-center"
+                })
+            }
 
         } catch (error) {
             console.log(error);
+            toast.error(error?.response?.data?.error, {
+                duration: 5000,
+                position: "top-center"
+            })
         }
     }
     return (
