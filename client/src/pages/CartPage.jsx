@@ -28,10 +28,10 @@ const CartPage = () => {
 
     const orderNow = async (amount) => {
 
-        const { data: { key } } = await axios.get("https://ecommerce-4y88.onrender.com/getkey", { withCredentials: true, baseURL: "https://ecommerce-4y88.onrender.com" })
-        const { data: { order } } = await axios.post("https://ecommerce-4y88.onrender.com/checkout", {
+        const { data: { key } } = await axios.get("http://localhost:8000/getkey", { withCredentials: true, baseURL: "http://localhost:8000" })
+        const { data: { order } } = await axios.post("http://localhost:8000/checkout", {
             amount
-        }, { withCredentials: true, baseURL: "https://ecommerce-4y88.onrender.com" })
+        }, { withCredentials: true, baseURL: "http://localhost:8000" })
 
         const options = {
             key,
@@ -41,7 +41,7 @@ const CartPage = () => {
             description: "Tutorial of RazorPay",
             image: "https://lh3.googleusercontent.com/a/ACg8ocJFEy5iM5n0P_pk8b4knn7k6rqoppxnXc2HfY4FI0iv=s360-c-no",
             order_id: order.id,
-            callback_url: "https://ecommerce-4y88.onrender.com/paymentverification",
+            callback_url: "http://localhost:8000/paymentverification",
             prefill: {
                 name: "Ecommerce Store",
                 email: "ecom.store@example.com",

@@ -17,7 +17,7 @@ const ProfilePage = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const res = await axios.get(`https://ecommerce-4y88.onrender.com/getuser/${user?._id}`, { withCredentials: true, baseURL: "http://localhost:8000" })
+                const res = await axios.get(`http://localhost:8000/getuser/${user?._id}`, { withCredentials: true, baseURL: "http://localhost:8000" })
                 setData(res?.data)
 
             } catch (error) {

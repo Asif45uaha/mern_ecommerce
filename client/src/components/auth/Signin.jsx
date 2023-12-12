@@ -15,7 +15,7 @@ const Signin = ({ setVariant }) => {
     const handleSubmit = async (ev) => {
         ev.preventDefault()
         try {
-            const response = await axios.post("https://ecommerce-4y88.onrender.com/login", { email, password }, { withCredentials: true, baseURL: "https://ecommerce-4y88.onrender.com" })
+            const response = await axios.post("http://localhost:8000/login", { email, password }, { withCredentials: true, baseURL: "http://localhost:8000" })
             localStorage.setItem("jwt_auth", JSON.stringify(response?.data))
             setUser(response?.data)
             if (response?.status === 200) {

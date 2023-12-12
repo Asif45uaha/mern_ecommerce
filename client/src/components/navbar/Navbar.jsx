@@ -44,7 +44,7 @@ const Navbar = () => {
     }, [])
     const handleLogout = async () => {
         try {
-            await axios.post("https://ecommerce-4y88.onrender.com/logout", { withCredentials: true, baseURL: "https://ecommerce-4y88.onrender.com" })
+            await axios.post("http://localhost:8000/logout", { withCredentials: true, baseURL: "http://localhost:8000" })
             toast.success("Logout Success!!", {
                 duration: 5000,
                 position: "top-center",
