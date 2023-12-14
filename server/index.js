@@ -8,12 +8,19 @@ import bcrypt from 'bcryptjs'
 import User from "./models/user-model.js"
 import Razorpay from 'razorpay'
 import crypto from 'crypto'
+import path from "path"
 import { Payment } from "./models/payment-model.js"
 import protectedRoute from "./middlewares/protectRoute.js"
 import GenTokenSetCookie from "./helpers/GenTokenAndSetCookie.js"
 dotenv.config()
 
+const __dirname = path.resolve();
 const app = express()
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 
 app.use(express.json())
 app.use(cors({

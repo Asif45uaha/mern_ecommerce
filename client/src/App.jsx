@@ -29,19 +29,19 @@ function App() {
       <Routes>
         <Route path="/" element={user ? <Home /> : <Navigate to="/auth" />} />
         <Route path="/auth" element={!user ? <AuthPage /> : <Navigate to={'/'} />} />
-        <Route path="/laptops" element={<LaptopPage />} />
-        <Route path="/mobiles" element={<MobilePage />} />
-        <Route path="/mens" element={<MensPage />} />
-        <Route path="/womens" element={<WomensPage />} />
-        <Route path="/groceries" element={<Groceries />} />
-        <Route path="/watches" element={<Watches />} />
-        <Route path="/wishlist" element={<WishList />} />
-        <Route path="/:id" element={<Details />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/search" element={<SearchingRoute />} />
-        <Route path="/paymentsuccess" element={<PaymentSuccess />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/laptops" element={user && <LaptopPage />} />
+        <Route path="/mobiles" element={user && <MobilePage />} />
+        <Route path="/mens" element={user && <MensPage />} />
+        <Route path="/womens" element={user && <WomensPage />} />
+        <Route path="/groceries" element={user && <Groceries />} />
+        <Route path="/watches" element={user && <Watches />} />
+        <Route path="/wishlist" element={user && <WishList />} />
+        <Route path="/:id" element={user && <Details />} />
+        <Route path="/cart" element={user && <CartPage />} />
+        <Route path="/search" element={user && <SearchingRoute />} />
+        <Route path="/paymentsuccess" element={user && <PaymentSuccess />} />
+        <Route path="/orders" element={user && <Orders />} />
+        <Route path="/profile" element={user && <ProfilePage />} />
       </Routes>
       <Footer />
       <Toaster />
