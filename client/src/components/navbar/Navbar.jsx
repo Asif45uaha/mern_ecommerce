@@ -44,7 +44,7 @@ const Navbar = () => {
     }, [])
     const handleLogout = async () => {
         try {
-            await axios.post("http://localhost:8000/logout", { withCredentials: true, baseURL: "http://localhost:8000" })
+            await axios.post("https://mern-ecommerce-l443.onrender.com/logout", { withCredentials: true, baseURL: "https://mern-ecommerce-l443.onrender.com" })
             toast.success("Logout Success!!", {
                 duration: 5000,
                 position: "top-center",

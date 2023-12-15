@@ -10,7 +10,7 @@ const Orders = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/getOrders', { withCredentials: true, baseURL: "http://localhost:8000" })
+                const response = await axios.get('https://mern-ecommerce-l443.onrender.com/getOrders', { withCredentials: true, baseURL: "https://mern-ecommerce-l443.onrender.com" })
                 setOrders(response?.data)
                 console.log(response.data);
             } catch (error) {
