@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { UserAuth } from '../context/AuthContext'
 import axios from 'axios'
+
 import {
     Card,
     CardHeader,
@@ -14,10 +15,11 @@ import {
 const ProfilePage = () => {
     const { user } = UserAuth()
     const [data, setData] = useState({})
+
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const res = await axios.get(`https://mern-ecommerce-l443.onrender.com/getuser/${user?._id}`, { withCredentials: true, baseURL: "https://mern-ecommerce-l443.onrender.com" })
+                const res = await axios.get(`http://localhost:8000/api/users/getuser/${user?._id}`)
                 setData(res?.data)
 
             } catch (error) {
@@ -26,12 +28,15 @@ const ProfilePage = () => {
         }
         fetchUserData()
     }, [user])
-    console.log(data);
+
     return (
         <div className='h-screen flex justify-center items-center'>
             <Card className="max-w-3xl mx-auto ">
                 <CardHeader floated={false} className="h-80">
-                    <img src={data?.user?.profilePic} alt="profile-picture" className='object-contain ' />
+                    {
+                        data?.user?.profilePic && <img src={data?.user?.profilePic} alt="profile-picture" className='object-contain ' />
+                    }
+
                 </CardHeader>
                 <CardBody className="text-center">
                     <Typography variant="h4" color="blue-gray" className="mb-2">

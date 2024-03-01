@@ -28,10 +28,10 @@ const CartPage = () => {
 
     const orderNow = async (amount) => {
 
-        const { data: { key } } = await axios.get("https://mern-ecommerce-l443.onrender.com/getkey", { withCredentials: true, baseURL: "https://mern-ecommerce-l443.onrender.com" })
-        const { data: { order } } = await axios.post("https://mern-ecommerce-l443.onrender.com/checkout", {
+        const { data: { key } } = await axios.get("http://localhost:8000/api/payment/getkey")
+        const { data: { order } } = await axios.post("http://localhost:8000/api/payment/checkout", {
             amount
-        }, { withCredentials: true, baseURL: "https://mern-ecommerce-l443.onrender.com" })
+        })
 
         const options = {
             key,
@@ -41,7 +41,7 @@ const CartPage = () => {
             description: "Tutorial of RazorPay",
             image: "https://lh3.googleusercontent.com/a/ACg8ocJFEy5iM5n0P_pk8b4knn7k6rqoppxnXc2HfY4FI0iv=s360-c-no",
             order_id: order.id,
-            callback_url: "https://mern-ecommerce-l443.onrender.com/paymentverification",
+            callback_url: "http://localhost:8000/api/payment//paymentverification",
             prefill: {
                 name: "Ecommerce Store",
                 email: "ecom.store@example.com",

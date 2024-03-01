@@ -9,13 +9,15 @@ import { useState } from "react";
 import { UserAuth } from "../../context/AuthContext";
 import toast from 'react-hot-toast';
 const Signin = ({ setVariant }) => {
+
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const { setUser } = UserAuth()
+
     const handleSubmit = async (ev) => {
         ev.preventDefault()
         try {
-            const response = await axios.post("https://mern-ecommerce-l443.onrender.com/login", { email, password }, { withCredentials: true, baseURL: "https://mern-ecommerce-l443.onrender.com" })
+            const response = await axios.post("http://localhost:8000/api/auth/login", { email, password })
             localStorage.setItem("jwt_auth", JSON.stringify(response?.data))
             setUser(response?.data)
             if (response?.status === 200) {

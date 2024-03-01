@@ -21,6 +21,8 @@ import {
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast';
+
+
 const Navbar = () => {
     const { user, setUser } = UserAuth()
     const [isSticky, setIsSticky] = useState(false)
@@ -42,16 +44,19 @@ const Navbar = () => {
 
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
+
     const handleLogout = async () => {
         try {
-            await axios.post("https://mern-ecommerce-l443.onrender.com/logout", { withCredentials: true, baseURL: "https://mern-ecommerce-l443.onrender.com" })
-            toast.success("Logout Success!!", {
-                duration: 5000,
-                position: "top-center",
+            const res = await axios.post("http://localhost:8000/api/auth/logout")
+            if (res.status === 200) {
+                toast.success("Logout Success!!", {
+                    duration: 5000,
+                    position: "top-center",
 
-            })
-            localStorage.removeItem("jwt_auth")
-            setUser(null)
+                })
+                localStorage.removeItem("jwt_auth")
+                setUser(null)
+            }
         } catch (error) {
             console.log(error);
             toast.error(error?.response?.data?.error, {

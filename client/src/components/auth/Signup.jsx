@@ -13,38 +13,35 @@ const Signup = ({ setVariant }) => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [loading, setLoading] = useState(false)
     const [imgUrl, setImgUrl] = useState("");
     const fileRef = useRef(null)
+
     const handleImageChange = (ev) => {
+
         const file = ev.target.files[0]
-        setLoading(true)
+
+
         if (file && file.type.startsWith("image/")) {
-            const formData = new FormData()
-            formData.append("file", file)
-            formData.append("upload_preset", "n2e3fl0i")
-            formData.append("cloud_name", "ddvmanpjt")
-            fetch("https://api.cloudinary.com/v1_1/ddvmanpjt/image/upload", {
-                method: "POST",
-                body: formData
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    setImgUrl(data?.url?.toString())
-                    setLoading(false)
-                })
+            const fileReader = new FileReader()
+
+            fileReader.onloadend = () => {
+                setImgUrl(fileReader.result)
+            }
+
+            fileReader.readAsDataURL(file)
         }
 
 
     }
-    console.log(imgUrl);
+
     const handleSubmit = async (ev) => {
         ev.preventDefault()
         try {
-            const response = await axios.post("https://mern-ecommerce-l443.onrender.com/register", { name, email, password, profilePic: imgUrl }, { withCredentials: true, baseURL: "https://mern-ecommerce-l443.onrender.com" })
-            localStorage.setItem("jwt_auth", JSON.stringify(response?.data))
-            setUser(response?.data)
-            if (response?.status === 201) {
+            const response = await axios.post("http://localhost:8000/api/auth/register", { name, email, password, profilePic: imgUrl })
+
+            if (response.status === 201) {
+                localStorage.setItem("jwt_auth", JSON.stringify(response?.data))
+                setUser(response?.data)
                 toast.success("Signup Success", {
                     duration: 5000,
                     position: "top-center"
@@ -111,10 +108,7 @@ const Signup = ({ setVariant }) => {
                         />
                     </div>
                     <div className="pt-6 w-full mx-auto">
-                        {
-                            loading ? <p className="text-center">Loading...</p> : <Button variant="filled" className="w-full" onClick={() => fileRef.current.click()}>Upload Profile</Button>
-                        }
-
+                        <Button variant="filled" className="w-full" onClick={() => fileRef.current.click()}>Upload Profile</Button>
                         <input onChange={handleImageChange} type="file" ref={fileRef} className="hidden" />
                     </div>
                     <Button type="submit" className="mt-6" fullWidth>
