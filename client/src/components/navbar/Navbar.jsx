@@ -47,7 +47,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
-            const res = await axios.post("http://localhost:8000/api/auth/logout")
+            const res = await axios.post("https://mern-ecommerce-l443.onrender.com/api/auth/logout")
             if (res.status === 200) {
                 toast.success("Logout Success!!", {
                     duration: 5000,

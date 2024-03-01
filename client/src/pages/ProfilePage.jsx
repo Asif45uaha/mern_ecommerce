@@ -19,7 +19,7 @@ const ProfilePage = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const res = await axios.get(`http://localhost:8000/api/users/getuser/${user?._id}`)
+                const res = await axios.get(`https://mern-ecommerce-l443.onrender.com/api/users/getuser/${user?._id}`)
                 setData(res?.data)
 
             } catch (error) {

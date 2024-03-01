@@ -37,7 +37,7 @@ const Signup = ({ setVariant }) => {
     const handleSubmit = async (ev) => {
         ev.preventDefault()
         try {
-            const response = await axios.post("http://localhost:8000/api/auth/register", { name, email, password, profilePic: imgUrl })
+            const response = await axios.post("https://mern-ecommerce-l443.onrender.com/api/auth/register", { name, email, password, profilePic: imgUrl })
 
             if (response.status === 201) {
                 localStorage.setItem("jwt_auth", JSON.stringify(response?.data))
